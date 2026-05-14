@@ -373,11 +373,7 @@ struct RestrictEventsPolicy {
 		if (strstr(value, "f16c", strlen("f16c"))) {
 			enableF16cPatching = true;
 		}
-		if (strstr(value, "auto", strlen("auto"))) {
-			// Do not enable Memory and PCI UI patching on real Macs
-			// Reference: https://github.com/acidanthera/bugtracker/issues/2046
-			enableMemoryUiPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple;
-			enablePciUiPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple;
+		if (strstr(value, "auto", strlen("auto"))) {;
 			enableCpuNamePatching = true;
 		}
 
@@ -408,8 +404,8 @@ struct RestrictEventsPolicy {
 				cpuFindSize = getKernelVersion() >= KernelVersion::Catalina ? sizeof("\0" "6-Core Intel Core i5") : sizeof("\0" "Intel Core i5");
 				break;
 			case 8:
-				cpuFindPatch = "\0" "8-Core Intel Xeon W";
-				cpuFindSize = sizeof("\0" "8-Core Intel Xeon W");
+				cpuFindPatch = "\0" "8-Core AMD Ryzen 7 5700U";
+				cpuFindSize = sizeof("\0" "8-Core AMD Ryzen 7 5700U");
 				break;
 			case 10:
 				cpuFindPatch = "\0" "10-Core Intel Xeon W";
